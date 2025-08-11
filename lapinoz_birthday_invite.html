@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Broke Birthday Invite 🎉</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0f172a;--card:#0b1220;--accent:#ff6b6b;--accent2:#ffd166}
+    *{box-sizing:border-box;font-family:'Poppins',system-ui,Segoe UI,Arial}
+    body{margin:0;min-height:100vh;background:linear-gradient(180deg,#071029 0%, #0f172a 100%);display:flex;align-items:center;justify-content:center;padding:28px;color:#e6eef8}
+    .wrap{max-width:720px;width:100%;}
+    .plate{background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02));border-radius:20px;padding:28px;box-shadow:0 10px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.05)}
+    h1{margin:0 0 8px;font-size:22px;display:flex;align-items:center;gap:12px}
+    .sub{color:#a9c0df;margin-bottom:18px;font-size:14px}
+    .open-btn{display:inline-block;padding:12px 18px;border-radius:14px;background:linear-gradient(90deg,var(--accent),#ff8fab);color:white;font-weight:600;border:none;cursor:pointer;box-shadow:0 6px 18px rgba(255,107,107,0.16);}
+    .note{margin-top:14px;color:#cfe3ff;font-size:13px}
+    .card{margin-top:22px;display:none;padding:20px;border-radius:14px;background:linear-gradient(180deg,#071433, #08223b);border:1px solid rgba(255,255,255,0.05)}
+    .big{font-size:18px;font-weight:700;margin-bottom:8px}
+    .muted{color:#9fb3d6;font-size:15px;line-height:1.5}
+    .footer{display:flex;gap:12px;align-items:center;margin-top:20px}
+    .avatar{width:44px;height:44px;border-radius:10px;background:linear-gradient(90deg,var(--accent2),#ffd1a9);display:flex;align-items:center;justify-content:center;font-weight:700;color:#0b1220}
+    @media (max-width:520px){h1{font-size:18px}.wrap{padding:8px}}
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+  <div class="wrap">
+    <div class="plate">
+      <h1>🎂🍕 Broke Birthday Invite</h1>
+      <div class="sub">Tap below to reveal the delicious truth 👀</div>
+      <button class="open-btn" id="open">Open Cute Invite ✨</button>
+      <div class="note">(Click to see details. Works on mobile too!)</div>
+      <div class="card" id="card">
+        <div class="big">Dear F7,</div>
+        <p class="muted">Your beloved August-born queens, <strong>Tanushri & Me</strong>, have decided to merge their birthdays into one <em>Mega Budget-Friendly Treat</em> 🎉💸.<br><br>
+        👑 <strong>Tanushri</strong> — normally rich & royalty — is now financially humble after giving 4 parties already.<br>
+        🫠 <strong>Me</strong> — always budget-friendly — am also broke (and should give 3 more parties other than this) 😭.<br><br>
+        🍕 Eat <strong>ALL</strong> you want — pizzas, pastas, desserts — but only <u>inside Lapinoz</u>.<br>
+        🪦 Outside = “Sorry, wallet RIP.” 💳<br>
+        🐷 Come hungry, leave rolling.<br>
+        ❤️🍝 We’re broke, but our love (and carbs) are unlimited.<br><br>
+        📅 <strong>Date:</strong> 13th August 2025</p>
+        <div class="footer">
+          <div class="avatar">T</div>
+          <div>
+            <div style="font-weight:700">Tanushri & [Your Name]</div>
+            <div style="font-size:13px;color:#9fb3d6">Lapinoz Pizza — location in group chat</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const open = document.getElementById('open');
+    const card = document.getElementById('card');
+    open.addEventListener('click',()=>{
+      card.style.display='block';
+      open.disabled=true;open.innerText='Opened ✅';
+      launchConfetti();
+    });
+    function launchConfetti(){
+      const c=document.getElementById('confetti');
+      c.width=innerWidth; c.height=innerHeight; const ctx=c.getContext('2d');
+      const pieces=[]; const colors=['#ffd166','#ff6b6b','#6bf2ff','#9bffb3','#ffd1a9'];
+      for(let i=0;i<120;i++){pieces.push({x:Math.random()*c.width,y:Math.random()*-c.height,vy:2+Math.random()*6,ax:(Math.random()-0.5)*0.02,rot:Math.random()*360,size:6+Math.random()*8,color:colors[i%colors.length]});}
+      let raf; function frame(){ctx.clearRect(0,0,c.width,c.height); for(const p of pieces){p.y+=p.vy; p.x+=Math.sin(p.y/30)*4 + p.ax*50; p.rot+=p.vy*0.05; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180); ctx.fillStyle=p.color; ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6); ctx.restore(); if(p.y>c.height+20){p.y=-20; p.x=Math.random()*c.width;}} raf=requestAnimationFrame(frame);} frame();
+      setTimeout(()=>{cancelAnimationFrame(raf); ctx.clearRect(0,0,c.width,c.height);},6000);
+    }
+    addEventListener('resize',()=>{const c=document.getElementById('confetti'); c.width=innerWidth; c.height=innerHeight;});
+  </script>
+</body>
+</html>
